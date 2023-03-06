@@ -9,6 +9,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import com.braver.wear.android.databinding.ActivityMainBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
@@ -32,7 +34,11 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
         const val EXTRA_USER_EMAIL = "extra_user_email"
         const val EXTRA_USER_PHONE = "extra_user_phone"
         const val EXTRA_MESSAGE_FROM_WEAR = "extra_message_from_wear"
+        val data = MutableLiveData<String>()
+
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,17 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
         mainBinding.sendDataButton.setOnClickListener { v ->
             sendDataToWearApp()
         }
+        //mainBinding.screenTitle.text = AppPreference.getStringPreference(this,"DATA")
+
+        data.observe(this){
+            it?.let {
+                mainBinding.screenTitle.text = it
+            }
+        }
+        /*if (AppPreference.getStringPreference(this,"DATA").isNullOrEmpty()){
+
+        }*/
+
     }
 
     override fun onStart() {

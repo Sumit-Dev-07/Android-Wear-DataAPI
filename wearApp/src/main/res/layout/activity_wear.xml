@@ -20,14 +20,14 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:layout_boxedEdges="all">
 
-        <TextView
+        <EditText
             android:id="@+id/screenTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Wear-Data API Example"
+            android:text="Enter Text"
             android:textColor="#fff"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="@string/btn_text"
+            android:text="Send Data"
             android:textAllCaps="false"
             android:textSize="10sp" />
 

@@ -38,6 +38,14 @@ class WearDataListenerService : WearableListenerService(), DataApi.DataListener 
                         "Message from Wear device is :$wMessage",
                         Toast.LENGTH_SHORT
                     ).show()
+                    AppPreference.setStringPreference(this,"DATA","$wMessage")
+
+                    try {
+                        MainActivity.data.postValue(wMessage)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 } else {
                     Log.i(
                         "##BTApp-Wear@@$TAG",

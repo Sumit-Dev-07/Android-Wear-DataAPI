@@ -90,7 +90,8 @@ class WearActivity : Activity(), GoogleApiClient.ConnectionCallbacks,
         Log.i(TAG, "----hasConnectedApi------->$wearAvailable")
         val dataMapRequest = PutDataMapRequest.create(PATH_FOR_MOBILE)
         val map = dataMapRequest.dataMap
-        map.putString(EXTRA_MESSAGE_FROM_WEAR, getRandomString())
+        //map.putString(EXTRA_MESSAGE_FROM_WEAR, getRandomString())
+        map.putString(EXTRA_MESSAGE_FROM_WEAR, mainBinding.screenTitle.text.toString().trim())
         map.putLong(EXTRA_CURRENT_TIME, Date().time)
         val putDataRequest = dataMapRequest.asPutDataRequest()
         putDataRequest.setUrgent()
