@@ -6,10 +6,11 @@
 package com.braver.wear.android
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.braver.wear.android.databinding.ActivityMainBinding
 import com.google.android.gms.common.ConnectionResult
@@ -41,18 +42,18 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
         mainBinding.sendDataButton.setOnClickListener { v ->
-            sendDataToWearApp()
+            actionOnService(Actions.START)
+            //sendDataToWearApp()
         }
         getFirebaseToken()
         //mainBinding.screenTitle.text = AppPreference.getStringPreference(this,"DATA")
 
-        data.observe(this){
+        data.observe(this) {
             it?.let {
                 mainBinding.screenTitle.text = it
             }
@@ -150,8 +151,23 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
                 )
                 return@OnCompleteListener
             }
-            Log.e("getFirebaseToken",""+task.result)
+            Log.e("getFirebaseToken", "" + task.result)
         })
+    }
+
+    private fun actionOnService(action: Actions) {
+        Toast.makeText(this@MainActivity, "Working", Toast.LENGTH_SHORT).show()
+        if (getServiceState(this) == ServiceState.STOPPED && action == Actions.STOP) return
+        Intent(this, EndlessService::class.java).also {
+            it.action = action.name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                log("Starting the service in >=26 Mode")
+                startForegroundService(it)
+                return
+            }
+            log("Starting the service in < 26 Mode")
+            startService(it)
+        }
     }
 
 }
