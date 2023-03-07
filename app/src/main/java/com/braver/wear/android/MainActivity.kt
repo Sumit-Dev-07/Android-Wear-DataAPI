@@ -15,9 +15,11 @@ import com.braver.wear.android.databinding.ActivityMainBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GooglePlayServicesUtil
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.wearable.DataApi.DataItemResult
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.google.firebase.messaging.FirebaseMessaging
 import java.util.*
 
 class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
         mainBinding.sendDataButton.setOnClickListener { v ->
             sendDataToWearApp()
         }
+        getFirebaseToken()
         //mainBinding.screenTitle.text = AppPreference.getStringPreference(this,"DATA")
 
         data.observe(this){
@@ -136,4 +139,19 @@ class MainActivity : AppCompatActivity(), GoogleApiClient.ConnectionCallbacks,
             mGoogleApiClient!!.connect()
         }
     }
+
+    private fun getFirebaseToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(
+                    "HomeDashboardFragment",
+                    "Fetching FCM registration token failed",
+                    task.exception
+                )
+                return@OnCompleteListener
+            }
+            Log.e("getFirebaseToken",""+task.result)
+        })
+    }
+
 }

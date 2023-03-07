@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "714247366228",
+    "project_id": "wearosnotification-cb33e",
+    "storage_bucket": "wearosnotification-cb33e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714247366228:android:56878e99813575e2836fc1",
+        "android_client_info": {
+          "package_name": "com.braver.wear.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714247366228-r365kbp0mhi4bsgrcgmga1ae15dv2i58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.braver.wear.android",
+            "certificate_hash": "685fde4b34baba4df3e03347df6e51e6972f2855"
+          }
+        },
+        {
+          "client_id": "714247366228-oaj4fld58auri4m02i1rp0tfjsv5c5je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoi8uApcCQPPxr-OfjOrz_CpO6K_XG_QU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714247366228-oaj4fld58auri4m02i1rp0tfjsv5c5je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
